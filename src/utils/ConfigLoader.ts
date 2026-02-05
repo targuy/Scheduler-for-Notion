@@ -42,6 +42,10 @@ export class ConfigLoader {
 
   /**
    * Create a sample workflow configuration
+   * 
+   * Note: Template strings like '${currentItem.id}' are placeholders that will be
+   * processed at runtime by the workflow engine. They are stored as literal strings
+   * in the configuration and replaced with actual values during execution.
    */
   static createSampleConfig(): SchedulerConfig {
     const sampleWorkflow: AgentWorkflow = {
@@ -66,6 +70,7 @@ export class ConfigLoader {
           {
             type: 'read',
             params: {
+              // Template placeholder - will be replaced with actual item ID at runtime
               pageId: '${currentItem.id}'
             }
           },
@@ -76,6 +81,7 @@ export class ConfigLoader {
           {
             type: 'update',
             params: {
+              // Template placeholder - will be replaced with actual item ID at runtime
               pageId: '${currentItem.id}'
             }
           }

@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { NotionService } from './notion/NotionService';
 import { LLMFactory } from './llm/LLMFactory';
+import { ILLMClient } from './llm/BaseLLMClient';
 import { NotionAgent } from './agent/NotionAgent';
 import { WorkflowScheduler } from './scheduler/WorkflowScheduler';
 import { ConfigLoader } from './utils/ConfigLoader';
@@ -15,7 +16,7 @@ dotenv.config();
  */
 export class NotionSchedulerApp {
   private notionService: NotionService;
-  private llmClient: any;
+  private llmClient: ILLMClient;
   private agent: NotionAgent;
   private scheduler: WorkflowScheduler | null = null;
   private mcpConnector: MCPConnector | null = null;
