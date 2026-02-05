@@ -438,6 +438,58 @@ Generate content based on templates:
 
 ## Development
 
+### About TypeScript
+
+**What is TypeScript?**
+
+TypeScript (TS) is a strongly-typed programming language that builds on JavaScript. It was developed and is maintained by Microsoft. TypeScript adds optional static typing to JavaScript, which means you can define types for your variables, function parameters, and return values. This helps catch errors at compile-time rather than at runtime.
+
+Key features of TypeScript:
+- **Static Type Checking**: Catches type-related errors during development before code runs
+- **Enhanced IDE Support**: Better autocomplete, refactoring, and navigation
+- **Modern JavaScript Features**: Supports latest ECMAScript features and compiles to older JavaScript versions
+- **Object-Oriented Programming**: Full support for classes, interfaces, and inheritance
+- **Gradual Adoption**: Can be adopted incrementally in existing JavaScript projects
+
+**Why TypeScript for this Project?**
+
+We chose TypeScript for the Scheduler for Notion project for several important reasons:
+
+1. **Type Safety for Complex Data Structures**: Notion's API returns complex nested objects with many optional properties. TypeScript's type system helps us handle these structures safely and prevents runtime errors when accessing properties.
+
+2. **Better Developer Experience**: With TypeScript, IDEs can provide intelligent autocomplete for Notion API objects, LLM responses, and workflow configurations. This makes development faster and reduces bugs.
+
+3. **Self-Documenting Code**: Type definitions in `src/types/index.ts` serve as living documentation. For example, the `AgentWorkflow` interface clearly shows what properties a workflow must have, making it easier for contributors to understand the codebase.
+
+4. **Refactoring Confidence**: When modifying code that interacts with multiple services (Notion API, OpenAI, Anthropic, LMStudio), TypeScript ensures that all usages are updated correctly, preventing breaking changes.
+
+5. **Integration Reliability**: This project integrates with multiple external APIs (Notion, OpenAI, Anthropic). TypeScript helps ensure that we're sending and receiving data in the expected format, reducing integration issues.
+
+6. **Early Error Detection**: Issues like typos in property names, incorrect function arguments, or missing required fields are caught during development rather than in production when a scheduled workflow runs.
+
+7. **Security Benefits**: Type checking helps prevent common security issues related to data validation and handling untrusted input from APIs.
+
+Example of TypeScript in action:
+```typescript
+// Type definition ensures workflows are structured correctly
+export interface AgentWorkflow {
+  name: string;
+  description?: string;
+  actions: AgentAction[];
+  loop?: {
+    items: string;
+    actions: AgentAction[];
+  };
+}
+
+// The compiler ensures we pass the right types
+const workflow: AgentWorkflow = {
+  name: "my-workflow",
+  actions: [/* ... */]
+  // TypeScript would error if we forgot 'name' or 'actions'
+};
+```
+
 ### Build TypeScript
 
 ```bash
