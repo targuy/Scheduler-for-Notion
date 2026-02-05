@@ -2,6 +2,8 @@
 
 Get up and running with Scheduler for Notion in minutes!
 
+> **Note**: This project uses TypeScript. If you see `.ts` files and want to learn more about them, check out [TYPESCRIPT.md](TYPESCRIPT.md).
+
 ## Prerequisites
 
 - Node.js 16+ installed
