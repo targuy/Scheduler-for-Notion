@@ -1,0 +1,67 @@
+{
+  "cronSchedule": "0 */4 * * *",
+  "enabled": true,
+  "workflows": [
+    {
+      "name": "content-summarization",
+      "description": "Summarize new content pages",
+      "actions": [
+        {
+          "type": "query",
+          "target": "YOUR_CONTENT_DATABASE_ID",
+          "params": {
+            "databaseId": "YOUR_CONTENT_DATABASE_ID",
+            "filter": {
+              "and": [
+                {
+                  "property": "Status",
+                  "select": {
+                    "equals": "Draft"
+                  }
+                },
+                {
+                  "property": "Summary",
+                  "rich_text": {
+                    "is_empty": true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "loop": {
+        "items": "queryResults",
+        "actions": [
+          {
+            "type": "read",
+            "params": {
+              "pageId": "${currentItem.id}"
+            }
+          },
+          {
+            "type": "llm",
+            "prompt": "Create a concise 2-3 sentence summary of this content that captures the main ideas and key takeaways."
+          },
+          {
+            "type": "update",
+            "params": {
+              "pageId": "${currentItem.id}",
+              "properties": {
+                "Summary": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "${context.llmResponse}"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cronSchedule": "0 9 * * 1",
+  "enabled": true,
+  "workflows": [
+    {
+      "name": "weekly-report",
+      "description": "Generate weekly report from project database",
+      "actions": [
+        {
+          "type": "query",
+          "target": "YOUR_DATABASE_ID",
+          "params": {
+            "databaseId": "YOUR_DATABASE_ID",
+            "filter": {
+              "property": "Created",
+              "date": {
+                "past_week": {}
+              }
+            }
+          }
+        },
+        {
+          "type": "llm",
+          "prompt": "Analyze the items from this week and create a comprehensive weekly report with key highlights, accomplishments, and insights. Format the report with clear sections."
+        },
+        {
+          "type": "write",
+          "target": "YOUR_REPORTS_DATABASE_ID",
+          "params": {
+            "databaseId": "YOUR_REPORTS_DATABASE_ID",
+            "properties": {
+              "Name": {
+                "title": [
+                  {
+                    "text": {
+                      "content": "Weekly Report - Week of {{DATE}}"
+                    }
+                  }
+                ]
+              },
+              "Type": {
+                "select": {
+                  "name": "Weekly Report"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

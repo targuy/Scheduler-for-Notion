@@ -1,0 +1,46 @@
+{
+  "cronSchedule": "0 8 * * *",
+  "enabled": true,
+  "workflows": [
+    {
+      "name": "task-analysis",
+      "description": "Analyze tasks and add AI insights",
+      "actions": [
+        {
+          "type": "query",
+          "target": "YOUR_TASKS_DATABASE_ID",
+          "params": {
+            "databaseId": "YOUR_TASKS_DATABASE_ID",
+            "filter": {
+              "property": "Status",
+              "select": {
+                "equals": "In Progress"
+              }
+            }
+          }
+        }
+      ],
+      "loop": {
+        "items": "queryResults",
+        "actions": [
+          {
+            "type": "read",
+            "params": {
+              "pageId": "${currentItem.id}"
+            }
+          },
+          {
+            "type": "llm",
+            "prompt": "Based on this task description, provide: 1) Estimated complexity (Low/Medium/High), 2) Potential blockers, 3) Suggested subtasks. Be concise and actionable."
+          },
+          {
+            "type": "update",
+            "params": {
+              "pageId": "${currentItem.id}"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
