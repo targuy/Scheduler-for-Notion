@@ -2,6 +2,8 @@
 
 An intelligent automation agent that interfaces Notion with Large Language Models (LLMs) to enhance the capabilities of Notion's built-in AI. This tool enables scheduled execution of complex workflows with conditional logic, loops, and AI-powered analysis.
 
+> **Note**: This project is written in [TypeScript](https://www.typescriptlang.org/). New to TypeScript or `.ts` files? Check out [TYPESCRIPT.md](TYPESCRIPT.md) for a comprehensive guide.
+
 ## Features
 
 - **Multi-LLM Support**: Works with OpenAI (ChatGPT), Anthropic (Claude), and LMStudio (local models)
@@ -27,6 +29,13 @@ This tool solves these problems by providing a powerful agent that can:
 - Execute complex logic with conditions and loops
 
 ## Installation
+
+### Prerequisites
+
+- Node.js 16+ installed
+- npm (comes with Node.js)
+
+### Steps
 
 1. Clone this repository:
 ```bash
@@ -494,6 +503,14 @@ Ensure all required variables in `.env` are set, especially:
 - Verify your API key is valid
 - Check API rate limits
 - For LMStudio, ensure the server is running locally
+
+## Documentation
+
+- **[README.md](README.md)** - Main documentation and usage guide (you are here)
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide for getting up and running
+- **[TYPESCRIPT.md](TYPESCRIPT.md)** - Understanding TypeScript and .ts files in this project
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture and design overview
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing to the project
 
 ## Contributing
 

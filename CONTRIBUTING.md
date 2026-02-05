@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to Scheduler for Notion! This document provides guidelines and instructions for contributing.
 
+> **New to TypeScript?** This project uses TypeScript for all source code. If you're not familiar with TypeScript or `.ts` files, please read [TYPESCRIPT.md](TYPESCRIPT.md) first for a comprehensive introduction.
+
 ## Getting Started
 
 1. Fork the repository
